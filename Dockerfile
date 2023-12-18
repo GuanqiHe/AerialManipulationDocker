@@ -26,3 +26,5 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
 
 # Set zsh as the default shell
 SHELL ["/bin/zsh", "--login", "-c"]
+
+RUN echo "source /opt/ros/noetic/setup.zsh" >> ~/.zshrc
