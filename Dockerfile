@@ -1,30 +1,21 @@
-# syntax=docker/dockerfile:1
+FROM tiryoh/ros-desktop-vnc:noetic
 
-FROM ros:noetic-robot
-
-# Install necessary tools and zsh
 RUN apt-get update && apt-get install -y \
     zsh \
     wget \
     git \
     curl \
     vim \
-    tmux
+    tmux \
+    python3-rosdep \
+    python-is-python3 \
+    emacs python3-jinja2 \
+    python3-wstool \
+    python3-pip \
+    libgeographic-dev \
+    geographiclib-tools \
+    python3-catkin-tools \
+    libusb-dev libsuitesparse-dev ros-noetic-geographic-msgs ros-noetic-serial ros-noetic-rosmon ros-noetic-jsk-rviz-plugins ros-noetic-joy libglfw3-dev libblosc-dev libopenexr-dev liblog4cplus-dev libpcap-dev opencl-headers ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control ros-noetic-rqt-gui ros-noetic-rqt-gui-py libgstreamer-plugins-base1.0-dev
 
-# Install required packages and set up the 'dev' user
-RUN useradd -m -s /bin/zsh dev && \
-    mkdir -p /home/dev && \
-    chown -R dev:dev /home/dev && \
-    echo 'dev ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Switch to the 'dev' user
-USER dev
-WORKDIR /home/dev
 
-# Install zsh-in-docker
-RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.5/zsh-in-docker.sh)" -- -t avit
-
-# Set zsh as the default shell
-SHELL ["/bin/zsh", "--login", "-c"]
-
-RUN echo "source /opt/ros/noetic/setup.zsh" >> ~/.zshrc
