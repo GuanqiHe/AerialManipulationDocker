@@ -1,0 +1,47 @@
+#!/bin/bash
+xhost +local: >> /dev/null
+
+# Function to handle help information
+show_help() {
+  echo "Usage: $0 [start|enter|stop|delete|help]"
+  echo "  start - Starts the Docker container."
+  echo "  enter - Enters the running Docker container."
+  echo "  stop - Stops the running Docker container."
+  echo "  delete - Stops and removes the Docker container."
+  echo "  help - Displays this help information."
+}
+
+# Main script logic using case statement
+case "$1" in
+  start)
+    docker run -itd --rm --name airlab-uam \
+                --privileged \
+                -v /dev:/dev \
+                --net=host \
+                -e DISPLAY=unix$DISPLAY \
+                -v /tmp/.X11-unix:/tmp/.X11-unix \
+                -v ~/airlab-uam:/home/airlab/airlab-uam \
+                -w /home/airlab/airlab-uam \
+                airlab-uam
+    ;;
+  enter)
+    docker exec -it \
+                -e DISPLAY=unix$DISPLAY \
+                --privileged \
+                -w /home/airlab/airlab-uam \
+                airlab-uam zsh
+    ;;
+  stop)
+    docker stop airlab-uam
+    ;;
+  delete)
+    docker stop airlab-uam && docker rm airlab-uam
+    ;;
+  help|*)
+    show_help
+    ;;
+  *)
+    echo "Invalid option: $1"
+    show_help
+    ;;
+esac
