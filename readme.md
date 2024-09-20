@@ -1,7 +1,11 @@
 Commands:
-- Docker build: `docker build -t aerial-manipulation .`
-- Run: `docker run -itd -p 6080:80 --shm-size=512m --network=host --name UAM aerial-manipulation`
-- Attach: `docker exec -it -u ubuntu UAM zsh`
-- Save current docker as image: `docker commit UAM aerial-manipulation`
+- Pull pre-build docker: `docker pull`
+- Docker build: `docker build -t go2 .`
 
-Docker image: https://hub.docker.com/r/guanqihe/aerial-manipulation
+Usage: ./go2 [start|enter|stop|delete|help]
+  start - Starts the Docker container.
+  enter - Enters the running Docker container.
+  stop - Stops the running Docker container.
+  delete - Stops and removes the Docker container.
+  help - Displays this help information.
+
