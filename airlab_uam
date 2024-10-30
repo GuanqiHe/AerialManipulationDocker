@@ -5,6 +5,7 @@ xhost +local: >> /dev/null
 show_help() {
   echo "Usage: $0 [start|enter|stop|delete|help]"
   echo "  start - Starts the Docker container."
+  echo "  restart - Restarts the Docker container."
   echo "  enter - Enters the running Docker container."
   echo "  stop - Stops the running Docker container."
   echo "  delete - Stops and removes the Docker container."
@@ -14,7 +15,7 @@ show_help() {
 # Main script logic using case statement
 case "$1" in
   start)
-    docker run -itd --rm --name airlab-uam \
+    docker run -itd --name airlab-uam \
                 --privileged \
                 -v /dev:/dev \
                 --net=host \
@@ -23,6 +24,9 @@ case "$1" in
                 -v ~/airlab-uam:/home/airlab/airlab-uam \
                 -w /home/airlab/airlab-uam \
                 airlab-uam
+    ;;
+  restart)
+    docker restart airlab-uam
     ;;
   enter)
     docker exec -it \

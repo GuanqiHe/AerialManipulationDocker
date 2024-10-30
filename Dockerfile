@@ -18,9 +18,16 @@ RUN apt-get update && apt-get install -y \
     libusb-dev libsuitesparse-dev ros-noetic-geographic-msgs ros-noetic-serial ros-noetic-rosmon ros-noetic-jsk-rviz-plugins ros-noetic-joy libglfw3-dev libblosc-dev libopenexr-dev liblog4cplus-dev libpcap-dev opencl-headers ros-noetic-gazebo-ros-pkgs ros-noetic-gazebo-ros-control ros-noetic-rqt-gui ros-noetic-rqt-gui-py libgstreamer-plugins-base1.0-dev
 
 RUN apt-get install -y net-tools
-
+RUN apt-get install -y openssh-server
 # create user airlab
 RUN useradd -ms /bin/bash airlab
+# set password for user airlab
+RUN echo 'airlab:airlab' | chpasswd
+# add user airlab to sudo group
+RUN usermod -aG sudo airlab
+# set user airlab as sudo user
+RUN echo "airlab ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+# set user airlab as default user
 WORKDIR /home/airlab
 # create workspace
 
