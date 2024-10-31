@@ -1,9 +1,8 @@
-#!/bin/bash
 xhost +local: >> /dev/null
 
 # Function to handle help information
 show_help() {
-  echo "Usage: $0 [start|enter|stop|delete|help]"
+  echo "Usage: $0 [start|restart|enter|stop|delete|help]"
   echo "  start - Starts the Docker container."
   echo "  restart - Restarts the Docker container."
   echo "  enter - Enters the running Docker container."
@@ -21,9 +20,15 @@ case "$1" in
                 --net=host \
                 -e DISPLAY=unix$DISPLAY \
                 -v /tmp/.X11-unix:/tmp/.X11-unix \
-                -v ~/airlab-uam:/home/airlab/airlab-uam \
-                -w /home/airlab/airlab-uam \
-                airlab-uam
+                -v ~/unitree-go2:/home/lecar/unitree-go2 \
+                -w /home/lecar/unitree-go2 \
+                go2
+    ;;
+  restart)
+    docker restart go2
+    ;;
+  restart)
+    docker restart airlab-uam
     ;;
   restart)
     docker restart airlab-uam
@@ -32,14 +37,14 @@ case "$1" in
     docker exec -it \
                 -e DISPLAY=unix$DISPLAY \
                 --privileged \
-                -w /home/airlab/airlab-uam \
-                airlab-uam zsh
+                -w /home/lecar/unitree-go2 \
+                go2 zsh
     ;;
   stop)
-    docker stop airlab-uam
+    docker stop go2
     ;;
   delete)
-    docker stop airlab-uam && docker rm airlab-uam
+    docker stop go2 && docker rm go2
     ;;
   help|*)
     show_help

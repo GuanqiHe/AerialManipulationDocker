@@ -9,5 +9,3 @@ Usage: ./airlab_uam [start|enter|stop|delete|help]
   delete - Stops and removes the Docker container.
   help - Displays this help information.
 
-
-Docker image: https://hub.docker.com/r/guanqihe/aerial-manipulation
