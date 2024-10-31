@@ -17,15 +17,15 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get install -y net-tools
 RUN apt-get install -y openssh-server
 # create user airlab
-RUN useradd -ms /bin/bash lecar
+RUN useradd -ms /bin/bash airlab
 # set password for user airlab
-RUN echo 'lecar:lecar' | chpasswd
+RUN echo 'airlab:airlab' | chpasswd
 # add user airlab to sudo group
-RUN usermod -aG sudo lecar
+RUN usermod -aG sudo airlab
 # set user airlab as sudo user
-RUN echo "lecar ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN echo "airlab ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # set user airlab as default user
-WORKDIR /home/lecar
+WORKDIR /home/airlab
 # create workspace
 
 USER lecar

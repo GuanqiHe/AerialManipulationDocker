@@ -1,8 +1,8 @@
 Commands:
 - Pull pre-build docker: `docker pull`
-- Docker build: `docker build -t go2 .`
+- Docker build: `docker build -t airlab-uam .`
 
-Usage: ./go2 [start|enter|stop|delete|help]
+Usage: ./airlab_uam [start|enter|stop|delete|help]
   start - Starts the Docker container.
   enter - Enters the running Docker container.
   stop - Stops the running Docker container.

@@ -14,7 +14,7 @@ show_help() {
 # Main script logic using case statement
 case "$1" in
   start)
-    docker run -itd --name go2 \
+    docker run -itd --name airlab-uam \
                 --privileged \
                 -v /dev:/dev \
                 --net=host \
@@ -26,6 +26,9 @@ case "$1" in
     ;;
   restart)
     docker restart go2
+    ;;
+  restart)
+    docker restart airlab-uam
     ;;
   enter)
     docker exec -it \
