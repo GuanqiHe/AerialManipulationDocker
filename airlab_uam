@@ -20,12 +20,12 @@ case "$1" in
                 --net=host \
                 -e DISPLAY=unix$DISPLAY \
                 -v /tmp/.X11-unix:/tmp/.X11-unix \
-                -v ~/unitree-go2:/home/lecar/unitree-go2 \
-                -w /home/lecar/unitree-go2 \
-                go2
+                -v ~/airlab-uam:/home/airlab/airlab-uam \
+                -w /home/airlab/airlab-uam \
+                airlab-uam
     ;;
   restart)
-    docker restart go2
+    docker restart airlab-uam
     ;;
   restart)
     docker restart airlab-uam
@@ -37,14 +37,14 @@ case "$1" in
     docker exec -it \
                 -e DISPLAY=unix$DISPLAY \
                 --privileged \
-                -w /home/lecar/unitree-go2 \
-                go2 zsh
+                -w /home/airlab/airlab-uam \
+                airlab-uam zsh
     ;;
   stop)
-    docker stop go2
+    docker stop airlab-uam
     ;;
   delete)
-    docker stop go2 && docker rm go2
+    docker stop airlab-uam && docker rm airlab-uam
     ;;
   help|*)
     show_help
